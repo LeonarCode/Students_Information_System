@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body class="dashboard">
+    <div class="fronts">
+        <h1 class="dashsign">HNHS Official Website</h1>
+        <img src="FB_IMG_1743228803306.jpg" alt="" class="hnhslogo">
+        <div class="btngroup">
+            <button onclick="showEnroll()">Enrollment &#x25BC;</button>
+            <div class="enrollment">
+                <button onclick="studEnroll()">Apply for enrollment</button>
+                <button>Modify enrollment</button>
+                <button>Add/Withdraw Subjects</button>
+            </div>
+            <button onclick="dispStudForm()">Enrollment form</button>
+            <button onclick="showGrade()">Grades &#x25BC;</button>
+            <div class="grades">
+                <button onclick="viewGrades()">Report of Grades</button>
+                <button>Curriculum(For Senior High)</button>
+            </div>
+        </div>
+        <button onclick="showSAcc()" class="account"title="Account"><div class="accImg"></button>
+        <div class="curPassError">
+            <h3>Current Password Unmatch!</h3>
+            <button onclick="refreshPage()">OK</button>
+        </div>
+        <div class="passCheck">
+            <h3>Password Change Successfully</h3>
+            <button onclick="refreshPage()">OK</button>
+        </div>
+        <div class="studOpSuccess">
+            <h3>Successfully</h3>
+            <button onclick="refreshPage()">OK</button>
+        </div>
+        <div class="disptbl">
+            <div class="sHome">
+                <h1>Welcome to Hanopol National High School</h1>
+                <p class="sheesh">Official School Students Information Website</p>
+                <img src="Screenshot_2025-03-29-15-00-39-81_a23b203fd3aafc6dcb84e438dda678b6.jpg" alt="" width="270px" class="huhay">
+            </div>
+            <div class="jhEnroll">
+                <h2>Enrollment</h2>
+                <select id="gradeEnroll">
+
+                </select>
+                <button onclick="showSubEnroll()">Show Subject</button>
+                <div id="showSubject" class="showGodSub">
+
+                </div>
+                <button onclick="goEnroll()">Enroll</button>
+            </div>
+            <div class="shEnroll">
+                <h2>Enrollment</h2>
+                <div id="showSubjectsh" class="showGodSubsh">
+
+                </div>
+                <button onclick="goEnrollsh()">Enroll</button>
+            </div>
+            <div class="jhFormDisp">
+                <img id="imageDisp">
+            </div>
+            <div class="shFormDisp">
+                <img id="imageDispsh">
+            </div>
+            <div class="reportGrades_jh">
+                <h3>Report of Grades</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject ID</th>
+                            <th>Subject Name</th>
+                            <th>1st Grading</th>
+                            <th>2nd Grading</th>
+                            <th>3rd Grading</th>
+                            <th>4th Grading</th>
+                            <th>Final Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody id="jhGradeview">
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="reportGrades_sh">
+                <h3>Report of Grades</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject ID</th>
+                            <th>Subject Name</th>
+                            <th>1st Grading</th>
+                            <th>2nd Grading</th>
+                            <th>Final Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody class="shGradeview">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="studAccInfo">
+                <img src="default-profile.77c001a8.png" alt="">
+                <h3><%= student.Student_Name %></h3>
+                <label for="currentPassword">Current Password:</label>
+                <input type="password" id="currentPassword">
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword">
+                <button onclick="studPassChange()">Confirm</button>
+            </div>
+        </div>
+        <button class="outbtn" onclick="studentLogout()">Log Out</button>
+    </div>
+</body>
+<script src="script.js"></script>
+<script>
+    const xhrc = new XMLHttpRequest;
+    xhrc.onreadystatechange = function(){
+        if(xhrc.readyState == 4 && xhrc.status == 200){
+            document.getElementById("gradeEnroll").innerHTML = this.responseText;       
+        }
+    }
+    xhrc.open("GET", "http://localhost:3000/strDashboard");
+    xhrc.setRequestHeader('content-type', 'application/json');
+    xhrc.send();
+
+    if(localStorage.getItem("typeUser")=="Senior High"){
+        const xhrl = new XMLHttpRequest;
+        xhrl.onreadystatechange = function(){
+            if(xhrl.readyState == 4 && xhrl.status == 200){
+                document.getElementById("showSubjectsh").innerHTML = this.responseText;       
+            }
+        }
+        xhrl.open("GET", "http://localhost:3000/sderDashboard");
+        xhrl.setRequestHeader('content-type', 'application/json');
+        xhrl.send();
+    }
+    if(localStorage.getItem("typeUser")=="Junior High"){
+        const xhrd = new XMLHttpRequest;
+        xhrd.onreadystatechange = function(){
+            if(xhrd.readyState == 4 && xhrd.status == 200){
+                document.getElementById("imageDisp").src = this.responseText;
+                console.log(this.responseText);      
+            }
+        }
+        xhrd.open("GET", "http://localhost:3000/stroDashboard");
+        xhrd.setRequestHeader('content-type', 'application/json');
+        xhrd.send();
+    }else if(localStorage.getItem("typeUser")=="Senior High"){
+        const xhre = new XMLHttpRequest;
+        xhre.onreadystatechange = function(){
+            if(xhre.readyState == 4 && xhre.status == 200){
+                document.getElementById("imageDispsh").src = this.responseText;
+                console.log(this.responseText);      
+            }
+        }
+        xhre.open("GET", "http://localhost:3000/strwDashboard");
+        xhre.setRequestHeader('content-type', 'application/json');
+        xhre.send();
+    }
+
+    if(localStorage.getItem("typeUser") == "Junior High"){  
+        const xhrr = new XMLHttpRequest;
+        xhrr.onreadystatechange = function(){
+            if(xhrr.readyState == 4 && xhrr.status == 200){
+                document.getElementById("jhGradeview").innerHTML = this.responseText;       
+            }
+        }
+        xhrr.open("GET", "http://localhost:3000/stDashboard");
+        xhrr.setRequestHeader('content-type', 'application/json');
+        xhrr.send();
+    }else if(localStorage.getItem("typeUser") =="Senior High"){
+        const xhr = new XMLHttpRequest;
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                document.getElementById("shGradeview").innerHTML = this.responseText;       
+            }
+        }
+        xhr.open("GET", "http://localhost:3000/suDashboard");
+        xhr.setRequestHeader('content-type', 'application/json');
+        xhr.send();
+    }
+</script>
+</html>

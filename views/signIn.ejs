@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body class="signIn">
+    <h1 class="register">Registration</h1>
+    <div class="haynaku">
+        <!-- <span class="message"><%= message %></span> -->
+        <div class="signbox">
+            <button onclick="showUstype()"><p>Usertype &#x25BC; </p></button>
+            <div class="utype">
+                <button onclick="showStudType(); highlightuserType('Student')" class="pickStudent" value="Student">Student &#x25BC;</button>
+                <div class="chooseType">
+                    <button onclick="highlightStudType('Junior High')" class="pickJunior">Junior High</button>
+                    <button onclick="highlightStudType('Senior High')" class="pickSenior">Senior High</button>
+                </div>
+                <button onclick="highlightuserType('Teacher')" class="pickTeacher" value="Teacher">Teacher</button>
+            </div>
+            <label for="firstname">First name:</label>
+            <input type="text" id="firstname" class="firstname">
+            <label for="lastname">Last name:</label>
+            <input type="text" id="lastname" class="lastname">
+            <label for="email">Email:</label>
+            <input type="text" id="email" class="email">
+            <label for="username">Username:</label>
+            <input type="text" id="username" class="getuname">
+            <label for="password">Password:</label>
+            <input type="password" id="password" class="getpass">
+            <input type="file" id="upload">
+            <select id="gradeLevel" class="grdLvl">
+                <option value=""disabled>No Grade Level</option>
+            </select> 
+            <select id="strands" class="strndss">
+                <option value=""disabled>No Strand Found</option>
+            </select>
+        </div>
+        <button onclick="submit()"class="regbtn">Register</button>
+    </div>
+    <canvas id="tempCanvas" style="visibility: hidden; height: 100px; width: 100px; position: relative; top: 0px; left: 0px;"></canvas>
+</body>
+<script src="script.js"></script>
+<script>
+    const xhrr = new XMLHttpRequest();
+    xhrr.onreadystatechange = function(){
+        if(xhrr.readyState == 4 && xhrr.status == 200){
+            document.getElementById("gradeLevel").innerHTML = this.responseText;       
+        }
+    }
+
+    xhrr.open("GET", "http://localhost:3000/signup");
+    xhrr.setRequestHeader('content-type', 'application/json');
+
+    xhrr.send();
+    //for strand
+    const xhrrt = new XMLHttpRequest();
+    xhrrt.onreadystatechange = function(){
+        if(xhrrt.readyState == 4 && xhrrt.status == 200){
+            document.getElementById("strands").innerHTML = this.responseText;       
+        }
+    }
+
+    xhrrt.open("GET", "http://localhost:3000/signupp");
+    xhrrt.setRequestHeader('content-type', 'application/json');
+
+    xhrrt.send();
+</script>
+</html>

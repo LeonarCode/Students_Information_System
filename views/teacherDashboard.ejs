@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body class="teacherdash">
+    <div class="teacherTitle">
+        <h1>HNHS Official Website</h1>
+        <img src="FB_IMG_1743228803306.jpg" alt="" class="tlogo">
+    </div>
+    <div class="teacherMenu">
+        <div class="tAcc"><img src="user.png" alt="" class="tAccImg"><p class="pp">Teacher</p></div>
+        <p class="thdash">Dashboard</p>
+        <div class="menuGroup">
+            <button id="sectNames" onclick="showStudinSec()"> </button>
+            <button onclick="showAssigCl()">Input Grades</button>
+        </div>
+        <div class="setGroup">
+            <button onclick="showtAppForm()">Application Form</button>
+            <button onclick="showteaAcc()">Account</button>
+        </div>
+        <div class="helpGroup">
+            <button onclick="teacherLogout()">Log Out</button>
+        </div>
+    </div>
+    <div class="teacherManage">
+        <div class="teachAcc">
+            <img src="default-profile.77c001a8.png" alt="">
+            <h3><%= teacher.Teacher_Name %></h3>
+            <label for="tcurPass">Current Password</label>
+            <input type="password" id="tcurPass">
+            <label for="tnewPass">New Password</label>
+            <input type="password" id="tnewPass">
+            <button onclick="teaPassChange()">Confirm</button>
+        </div>
+        <div class="sectListSt">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                    </tr>
+                </thead>
+                <tbody id="secStudlist">
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="teaFormDisp">
+            <img id="imageDisptea">
+        </div>
+        <div class="inputGrade">
+            <h3>Input Grades</h3>
+            <select id="inputjhstud">
+                <option value="" disabled>No student found</option>
+            </select>
+            <select id="jhGradingPer">
+                <option value="First_Grading">1st Grading</option>
+                <option value="Second_Grading">2nd Grading</option>
+                <option value="Third_Grading">3rd Grading</option>
+                <option value="Fourth_Grading">4th Grading</option>
+                <option value="Final_Grade">Final Grade</option>
+            </select>
+            <label for="enterGrade">Enter the Grade</label>
+            <input type="text" id="enterGrade">
+            <button onclick="savejhGrade()">Save</button>
+        </div>
+        <div class="inputGradesh">
+            <h3>Input Grades</h3>
+            <select id="inputshstud">
+                <option value="" disabled>No student found</option>
+            </select>
+            <select id="shGradingPer">
+                <option value="First_Grading">1st Grading</option>
+                <option value="Second_Grading">2nd Grading</option>
+                <option value="Final_Grade">Final Grade</option>
+            </select>
+            <label for="enterGradesh">Enter the Grade</label>
+            <input type="text" id="enterGradesh">
+            <button onclick="saveshGrade()">Save</button>
+        </div>
+        <div class="tpassChanged">
+            <h2>Successfully</h2>
+            <button onclick="refreshPage()">OK</button>
+        </div>
+        <div class="tpassError">
+            <h2>Error</h2>
+            <button onclick="refreshPage()">OK</button>
+        </div>
+        <div class="showAssClass">
+            <h2>Assigned Class</h2>
+            <ul id="jhSched">
+                
+            </ul>
+            <ul id="shSched">
+
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+<script>
+    const xhrq = new XMLHttpRequest;
+        xhrq.onreadystatechange = function(){
+            if(xhrq.readyState == 4 && xhrq.status == 200){
+                document.getElementById("secStudlist").innerHTML = this.responseText;   
+            }
+        }
+        xhrq.open("GET", "http://localhost:3000/tuqDashboard");
+        xhrq.setRequestHeader('content-type', 'application/json');
+        xhrq.send();
+    const xhry = new XMLHttpRequest;
+        xhry.onreadystatechange = function(){
+            if(xhry.readyState == 4 && xhry.status == 200){
+                document.getElementById("sectNames").innerText = this.responseText;
+                console.log(this.responseText);      
+            }
+        }
+        xhry.open("GET", "http://localhost:3000/tsutDashboard");
+        xhry.setRequestHeader('content-type', 'application/json');
+        xhry.send();
+    const xhre = new XMLHttpRequest;
+        xhre.onreadystatechange = function(){
+            if(xhre.readyState == 4 && xhre.status == 200){
+                document.getElementById("imageDisptea").src = this.responseText;
+                console.log(this.responseText);      
+            }
+        }
+        xhre.open("GET", "http://localhost:3000/tuoDashboard");
+        xhre.setRequestHeader('content-type', 'application/json');
+        xhre.send();
+    const xhrr = new XMLHttpRequest();
+    xhrr.onreadystatechange = function(){
+        if(xhrr.readyState == 4 && xhrr.status == 200){
+            document.getElementById("jhSched").innerHTML = this.responseText;       
+        }
+    }
+    xhrr.open("GET", "http://localhost:3000/taDashboard");
+    xhrr.setRequestHeader('content-type', 'application/json');
+    xhrr.send();
+    
+    const xhrt = new XMLHttpRequest();
+    xhrt.onreadystatechange = function(){
+        if(xhrt.readyState == 4 && xhrt.status == 200){
+            document.getElementById("shSched").innerHTML = this.responseText;       
+        }
+    }
+    xhrt.open("GET", "http://localhost:3000/teeDashboard");
+    xhrt.setRequestHeader('content-type', 'application/json');
+    xhrt.send();
+
+    function savejhGrade(){
+    console.log("EE");
+    const jhStud = document.getElementById("inputjhstud").value;
+    const jhSubs = document.getElementById("jhGradingPer").value;
+    const enterGrade = document.getElementById("enterGrade").value;
+    const body = JSON.stringify({
+        jhStud: jhStud,
+        jhSubs: jhSubs,
+        enterGrade: enterGrade
+    });
+
+    const xhrb = new XMLHttpRequest();
+    xhrb.onreadystatechange = function(){
+        if(xhrb.readyState == 4 && xhrb.status == 200){
+            console.log(this.responseText);
+            if(this.responseText == "Error"){
+                document.querySelector(".tpassError").classList.toggle("showteaSuccess");
+            }else{
+                document.querySelector(".tpassChanged").classList.toggle("showteaSuccess");
+            }
+        }
+    }
+    
+    xhrb.open("POST", "http://localhost:3000/tweDashboard");
+    xhrb.setRequestHeader('content-type', 'application/json');
+
+    xhrb.send(body);
+}
+function saveshGrade(){
+    const shStud = document.getElementById("inputshstud").value;
+    const shSubs = document.getElementById("shGradingPer").value;
+    const enterGrade = document.getElementById("enterGradesh").value;
+    const body = JSON.stringify({
+        shStud: shStud,
+        shSubs: shSubs,
+        enterGrade: enterGrade
+    });
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log(this.responseText);
+            if(this.responseText == "Error"){
+                document.querySelector(".tpassError").classList.toggle("showteaSuccess");
+            }else{
+                document.querySelector(".tpassChanged").classList.toggle("showteaSuccess");
+            }
+        }
+    }
+    
+    xhr.open("POST", "http://localhost:3000/twoDashboard");
+    xhr.setRequestHeader('content-type', 'application/json');
+
+    xhr.send(body);
+
+}
+</script>
+</html>

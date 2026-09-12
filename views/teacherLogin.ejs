@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body class="telogpage">
+    <div class="tIntro">
+        <h1 class="tWelcome">Welcome to HNHS</h1>
+        <h2 class="tH2Wel">Official Students Information Website</h2>
+    </div>
+    <h1 class="tLogintxt">Teacher Login:</h1>
+    <div class="tBoxlog">
+        <label for="username">Username:</label>
+        <input type="text" id="teachUsername" class="teachUsernameLog">
+        <label for="password">Password: </label>
+        <input type="password" id="teachPassword" class="teachPasswordLog">
+    </div>
+    <div class="tPaneError">
+        <h1>Error!</h1>
+        <h3>Username & Password Mismatch!</h3>
+        <button onclick="refreshPage()">OK</button>
+    </div>
+    <button onclick="teacherLogin()" type="button" class="tLogbtn">LOGIN</button>
+    <button class="tForget">Forgot your password?</button>
+</body>
+<script src="script.js"></script>
+</html>

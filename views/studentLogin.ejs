@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body class="logpage">
+    <div class="intro">
+        <h1 class="welcome">Welcome to HNHS</h1>
+        <h2 class="h2Wel">Official Students Information Website</h2>
+    </div>
+    <h1 class="logintxt">Student Login:</h1>
+    <div class="logGroup">
+        <div class="boxlog">
+            <button onclick="showLogStud()">Student Type &#x25BC;</button>
+            <div class="logStudType">
+                <button onclick="highlightLogStud('Junior High')" class="logJunior">Junior High</button>
+                <button onclick="highlightLogStud('Senior High')" class="logSenior">Senior High</button>
+            </div>
+            <label for="username">Username:</label>
+            <input type="text" id="studUsername" class="studUsernameLog">
+            <label for="password">Password: </label>
+            <input type="password" id="studPassword" class="studPasswordLog">
+        </div>
+        <div class="sPaneError">
+            <h1>Error!</h1>
+            <h3>Username & Password Mismatch!</h3>
+            <button onclick="refreshPage()">OK</button>
+        </div>
+        <button onclick="studentLogIn()" class="logbtn">LOGIN</button>
+        <button class="forget">Forgot your password?</button>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>

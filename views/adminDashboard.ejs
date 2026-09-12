@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body class="adminDash">
+    <div class="adminTitle">
+        <h1>HNHS Official Website ADMIN Center</h1>
+        <img src="FB_IMG_1743228803306.jpg" alt="">
+    </div>
+    <div class="adSuccessPane">
+        <h2>Successfully</h2>
+        <button onclick="refreshPage()">OK</button>
+    </div>
+    <div class="adminMenu">
+        <h3>Admin Center Page</h3>
+        <img src="FB_IMG_1743228803306.jpg" alt="">
+        <div class="adManage">
+            <p>Manage Studets & Teacher</p>
+            <button onclick="showStuds()">Students</button>
+            <div class="manStud">
+                <button onclick="showJuniortable()">Junior High</button>
+                <button onclick="showSeniortable()">Senior High</button>
+            </div>
+            <button onclick="showClassMan()">Manage Class</button>
+            <div class="manWholeClass">
+                <button onclick="showAddSec()">Add Class Section</button>
+                <button onclick="showStudSh()">Manipulate Subjects</button>
+                <div class="manStuds">
+                    <button onclick="jhManSubs()">Junior High</button>
+                    <button onclick="shManSubs()">Senior High</button>
+                </div>
+                <button onclick="showSectOpt()">Section Groupings</button>
+                <div class="manGroupSec">
+                    <button onclick="jhSecGroup()">Junior High</button>
+                    <button onclick="shSecGroup()">Senior High</button>
+                </div>
+                <button onclick="showDelStud()">Delete Student</button>
+                <div class="manDelStud">
+                    <button onclick="showDeljhStud()">Junior High</button>
+                    <button onclick="showDelshStud()">Senior High</button>
+                </div>
+            </div>
+            <button onclick="showEmps()">Faculty & Staff</button>
+            <div class="manFS">
+                <button onclick="showTeachertbl()">Show Teacher</button>
+                <button onclick="showDelTeacher()">Delete Teacher</button>
+            </div>
+            <button onclick="showSubjects()">Manage Subjects</button>
+            <div class="manSub">
+                <button onclick="showSubAdd()">Add Subjects</button>
+                <div class="subAdd">
+                    <button onclick="addSubSet('Junior High')" class="subAddJunior">Junior High</button>
+                    <button onclick="addSubSet('Senior High')" class="subAddSenior">Senior High</button>
+                </div>
+                <button>Show Subjects</button>
+            </div>
+        </div>
+        <div class="manStrand">
+            <button onclick="showStrand()">Manage SHS Strands</button>
+            <div class="manStand">
+                <button onclick="showStrAdd()">Add Strand</button>
+                <button>Show Strand</button>
+            </div>
+        </div>
+        <div class="adSettings">
+            <button>Account</button>
+            <button onclick="adminLogout()">Log Out</button>
+        </div>
+    </div>
+    <div class="adShowManage">
+        <div class="addSub">
+            <h1>Add Subjects</h1>
+            <label for="subjectCode">Subject ID: </label>
+            <input type="text" id="subjectCode">
+            <label for="subjectName">Subject Name: </label>
+            <input type="text" id="subjectName">
+            <label for="subjectshh">Subject Code</label>
+            <input type="text" id="subjectshh">
+            <label for="teachers">Teacher</label>
+            <select id="teachers">
+                <option value="" disabled>No Teacher Found</option>
+            </select>
+            <button onclick="subSave()">Add</button>
+        </div>
+        <div class="delStudentjh">
+            <h1>Delete Student Junior</h1>
+            <select id="delJunior">
+
+            </select>
+            <button onclick="delStudjh()">Delete</button>
+        </div>
+        <div class="delStudentsh">
+            <h1>Delete Student Senior</h1>
+            <select id="delSenior">
+
+            </select>
+            <button onclick="delStudsh()">Delete</button>
+        </div>
+        <div class="delTeacher">
+            <h1>Delete Teacher</h1>
+            <select id="delTeach">
+
+            </select>
+            <button onclick="delTeache()">Delete</button>
+        </div>
+        <div class="addSec">
+            <h1>Add Section</h1>
+            <label for="secId">Section ID</label>
+            <input type="text" id="secId">
+            <label for="secName">Section Name</label>
+            <input type="text" id="secName">
+            <select id="secAdviser">
+
+            </select>
+            <button onclick="saveSec()">Add</button>
+        </div>
+        <div class="showManSubjh">
+            <h1>Subject Junior High</h1>
+            <select id="gradeMan">
+
+            </select>
+            <select id="subjectMan">
+
+            </select>
+            <button onclick="subjhGroupSave()">Save</button>
+        </div>
+        <div class="showManSubsh">
+            <h1>Subject Senior High</h1>
+            <select id="strandMan">
+
+            </select>
+            <select id="subjectMans">
+
+            </select>
+            <button onclick="subshGroupSave()">Save</button>
+        </div>
+        <div class="sectJuniorHigh">
+            <h1>Sectioning Junior High</h1>
+            <select id="studGroupSec">
+
+            </select>
+            <select id="gradeGroupSec">
+
+            </select>
+            <select id="sectGroupSec">
+
+            </select>
+            <button onclick="sectGroupjhSave()">Save</button>
+        </div>
+        <div class="sectSeniorHigh">
+            <h1>Sectioning Senior High</h1>
+            <select id="studshGroupSec">
+
+            </select>
+            <select id="strandGroupSec">
+
+            </select>
+            <select id="sectGroupSecsh">
+
+            </select>
+            <button onclick="sectGroupshSave()">Save</button>
+        </div>
+        <div class="addStn">
+            <h1>Add Strands</h1>
+            <label for="strandCode">Strand Code: </label>
+            <input type="text" id="strandCode">
+            <label for="strandName">Strand Name: </label>
+            <input type="text" id="strandName">
+            <button onclick="strSave()">Add</button>
+        </div>
+        <div class="showJuniorStuds">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Grade Level</th>
+                    </tr>
+                </thead>
+                <tbody id="juniorHighTbl">
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="showSeniorStud">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Strand</th>
+                    </tr>
+                </thead>
+                <tbody id="seniorHighTbl">
+                    
+                </tbody>
+            </table>
+        </div>
+        <div class="showTeacherssn">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Teacher ID</th>
+                        <th>Teacher Name</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody id="teacherTbl">
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+<script>
+    const xhrqq = new XMLHttpRequest();
+    xhrqq.onreadystatechange = function(){
+        if(xhrqq.readyState == 4 && xhrqq.status == 200){
+            document.getElementById("delTeach").innerHTML = this.responseText;       
+        }
+    }
+    xhrqq.open("GET", "http://localhost:3000/adkvDashboard");
+    xhrqq.setRequestHeader('content-type', 'application/json');
+    xhrqq.send();
+    const xhtr = new XMLHttpRequest();
+    xhtr.onreadystatechange = function(){
+        if(xhtr.readyState == 4 && xhtr.status == 200){
+            document.getElementById("delJunior").innerHTML = this.responseText;       
+        }
+    }
+    xhtr.open("GET", "http://localhost:3000/adpoDashboard");
+    xhtr.setRequestHeader('content-type', 'application/json');
+    xhtr.send();
+
+    const xhpr = new XMLHttpRequest();
+    xhpr.onreadystatechange = function(){
+        if(xhpr.readyState == 4 && xhpr.status == 200){
+            document.getElementById("delSenior").innerHTML = this.responseText;       
+        }
+    }
+    xhpr.open("GET", "http://localhost:3000/adprDashboard");
+    xhpr.setRequestHeader('content-type', 'application/json');
+    xhpr.send();
+
+    const xhrr = new XMLHttpRequest();
+    xhrr.onreadystatechange = function(){
+        if(xhrr.readyState == 4 && xhrr.status == 200){
+            document.getElementById("teachers").innerHTML = this.responseText;       
+        }
+    }
+    xhrr.open("GET", "http://localhost:3000/adDashboard");
+    xhrr.setRequestHeader('content-type', 'application/json');
+    xhrr.send();
+
+    const xhrs = new XMLHttpRequest();
+    xhrs.onreadystatechange = function(){
+        if(xhrs.readyState == 4 && xhrs.status == 200){
+            document.getElementById("secAdviser").innerHTML = this.responseText;       
+        }
+    }
+    xhrs.open("GET", "http://localhost:3000/adiDashboard");
+    xhrs.setRequestHeader('content-type', 'application/json');
+    xhrs.send();
+
+    const xhra = new XMLHttpRequest();
+    xhra.onreadystatechange = function(){
+        if(xhra.readyState == 4 && xhra.status == 200){
+            document.getElementById("gradeMan").innerHTML = this.responseText;       
+        }
+    }
+    xhra.open("GET", "http://localhost:3000/adssDashboard");
+    xhra.setRequestHeader('content-type', 'application/json');
+    xhra.send();
+
+    const xhrb = new XMLHttpRequest();
+    xhrb.onreadystatechange = function(){
+        if(xhrb.readyState == 4 && xhrb.status == 200){
+            document.getElementById("subjectMan").innerHTML = this.responseText;       
+        }
+    }
+    xhrb.open("GET", "http://localhost:3000/adsiDashboard");
+    xhrb.setRequestHeader('content-type', 'application/json');
+    xhrb.send();
+
+    const xhrc = new XMLHttpRequest();
+    xhrc.onreadystatechange = function(){
+        if(xhrc.readyState == 4 && xhrc.status == 200){
+            document.getElementById("strandMan").innerHTML = this.responseText;       
+        }
+    }
+    xhrc.open("GET", "http://localhost:3000/adshDashboard");
+    xhrc.setRequestHeader('content-type', 'application/json');
+    xhrc.send();
+
+    const xhrd = new XMLHttpRequest();
+    xhrd.onreadystatechange = function(){
+        if(xhrd.readyState == 4 && xhrd.status == 200){
+            document.getElementById("subjectMans").innerHTML = this.responseText;       
+        }
+    }
+    xhrd.open("GET", "http://localhost:3000/adsxDashboard");
+    xhrd.setRequestHeader('content-type', 'application/json');
+    xhrd.send();
+
+    const xhre = new XMLHttpRequest();
+    xhre.onreadystatechange = function(){
+        if(xhre.readyState == 4 && xhre.status == 200){
+            document.getElementById("studGroupSec").innerHTML = this.responseText;       
+        }
+    }
+    xhre.open("GET", "http://localhost:3000/adskDashboard");
+    xhre.setRequestHeader('content-type', 'application/json');
+    xhre.send();
+
+    const xhrf = new XMLHttpRequest();
+    xhrf.onreadystatechange = function(){
+        if(xhrf.readyState == 4 && xhrf.status == 200){
+            document.getElementById("gradeGroupSec").innerHTML = this.responseText;       
+        }
+    }
+    xhrf.open("GET", "http://localhost:3000/adkhDashboard");
+    xhrf.setRequestHeader('content-type', 'application/json');
+    xhrf.send();
+
+    const xhrg = new XMLHttpRequest();
+    xhrg.onreadystatechange = function(){
+        if(xhrg.readyState == 4 && xhrg.status == 200){
+            document.getElementById("sectGroupSec").innerHTML = this.responseText;       
+        }
+    }
+    xhrg.open("GET", "http://localhost:3000/adkiDashboard");
+    xhrg.setRequestHeader('content-type', 'application/json');
+    xhrg.send();
+
+    const xhrh = new XMLHttpRequest();
+    xhrh.onreadystatechange = function(){
+        if(xhrh.readyState == 4 && xhrh.status == 200){
+            document.getElementById("studshGroupSec").innerHTML = this.responseText;       
+        }
+    }
+    xhrh.open("GET", "http://localhost:3000/adkrDashboard");
+    xhrh.setRequestHeader('content-type', 'application/json');
+    xhrh.send();
+
+    const xhri = new XMLHttpRequest();
+    xhri.onreadystatechange = function(){
+        if(xhri.readyState == 4 && xhri.status == 200){
+            document.getElementById("strandGroupSec").innerHTML = this.responseText;       
+        }
+    }
+    xhri.open("GET", "http://localhost:3000/adklDashboard");
+    xhri.setRequestHeader('content-type', 'application/json');
+    xhri.send();
+
+    const xhrj = new XMLHttpRequest();
+    xhrj.onreadystatechange = function(){
+        if(xhrj.readyState == 4 && xhrj.status == 200){
+            document.getElementById("sectGroupSecsh").innerHTML = this.responseText;       
+        }
+    }
+    xhrj.open("GET", "http://localhost:3000/adkmDashboard");
+    xhrj.setRequestHeader('content-type', 'application/json');
+    xhrj.send();
+
+    //junior high table
+    const xhrrt = new XMLHttpRequest();
+    xhrrt.onreadystatechange = function(){
+        if(xhrrt.readyState == 4 && xhrrt.status == 200){
+            document.getElementById("juniorHighTbl").innerHTML = this.responseText;    
+        }
+    }
+    xhrrt.open("GET", "http://localhost:3000/aiDashboard");
+    xhrrt.setRequestHeader('content-type', 'application/json');
+    xhrrt.send();
+    //senior high table
+    const xhrrm = new XMLHttpRequest();
+    xhrrm.onreadystatechange = function(){
+        if(xhrrm.readyState == 4 && xhrrm.status == 200){
+            document.getElementById("seniorHighTbl").innerHTML = this.responseText;    
+        }
+    }
+    xhrrm.open("GET", "http://localhost:3000/aiiDashboard");
+    xhrrm.setRequestHeader('content-type', 'application/json');
+    xhrrm.send();
+    const xhrrg = new XMLHttpRequest();
+    xhrrg.onreadystatechange = function(){
+        if(xhrrg.readyState == 4 && xhrrg.status == 200){
+            document.getElementById("teacherTbl").innerHTML = this.responseText;    
+        }
+    }
+    xhrrg.open("GET", "http://localhost:3000/addfDashboard");
+    xhrrg.setRequestHeader('content-type', 'application/json');
+    xhrrg.send();
+</script>
+</html>
